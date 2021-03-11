@@ -1,0 +1,105 @@
+<!--Jumbotron/Header-->
+<section id="header" class="jumbotron text-center">
+    <h1 class="display-3"> RWB Car Transaction Logs </h1>
+</section>
+
+<div class="container">
+    <div class="row text-center h-100">
+        <div class="col-md-3 text-center my-auto">
+            <div class="card card-block d-flex" style="width: 60rem;">
+                <div class="card-body">
+                    <h3 class="card-title">Add Transaction</h3>
+                    <p><b>the selection options will be pre-determined from the inputs on the previous pages</b></p>
+                    <form class="centerForm" action="/transactions" method="POST">
+                        <fieldset>
+                            <div>
+                                <label for="customer">Customer:
+                                    <select name="customerPick" id="customerPick">
+                                        {{#each customerNames}}
+                                        <option value="{{customerId}}"> {{firstName }} {{lastName}}</option>
+                                        {{/each}}
+                                    </select>
+                                </label>
+                                <label for="employee">Employee:
+                                    <select name="employeePick" id="employeePick">
+                                        {{#each employeeNames}}
+                                        <option value="{{employeeId}}"> {{name}} </option>
+                                        {{/each}}
+                                    </select>
+                                </label>
+                                <label for="employee">Addtional Employee:
+                                    <select name="addemployeePick" id="employeePick">
+                                        <option value="none">None </option>
+                                        {{#each employeeNames}}
+                                        <option value="{{employeeId}}"> {{name}} </option>
+                                        {{/each}}
+                                    </select>
+                                </label>
+                                <label for="car">Car:
+                                    <select name="carPick" id="carPick">
+                                        {{#each carsModel}}
+                                        <option value="{{carId}}"> {{model}} </option>
+                                        {{/each}}
+                                    </select>
+                                </label>
+                                <label for="paymentDate">Payment Date:
+                                    <input type="date" name="paymentDate" required id="paymentDate">
+                                </label>
+                                <label for="dateSold">Date sold:
+                                    <input type="date" name="dateSold" required id="dateSold">
+                                </label>
+                                <label for="monthlyPayment">Monthly Payment:
+                                    <input type="number" name="monthlyPayment" required id="monthlyPayment">
+                                </label>
+                            </div>
+                            <input type="submit" value="Add Transaction" id="addTransaction">
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row text-center h-100">
+        <div class="col-md-3 text-center my-auto">
+            <div class="card card-block d-flex" style="width: 60rem;">
+                <div class="card-body">
+                    <h3 class="card-title">List Of Transactions</h3>
+                    <table class="table table-striped" border="1" width="400" height="80" align="left">
+                        <tr>
+                            <td>Customer </td>
+                            <td>Employee </td>
+                            <td>Car </td>
+                            <td>Transaction ID </td>
+                            <td>Monthly Payment</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        {{#each transactions}}
+                        <tr>
+                            <td>{{customer}}</td>
+                            <td>{{employee}}</td>
+                            <td>{{car}}</td>
+                            <td>{{transaction_number}}</td>
+                            <td>{{monthly_payment}}</td>
+                            <td>
+                                <button type="button">
+                                    <a href="/transactions/edit/{{transaction_number}}">EDIT</a>
+                                </button>
+                            </td>
+                            <td>
+                                <form action="/transactions/{{transaction_number}}?_method=DELETE" onsubmit="();return false"
+                                    method="POST">
+                                    <button type="submit"> DELETE</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

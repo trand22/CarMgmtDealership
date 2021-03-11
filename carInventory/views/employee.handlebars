@@ -1,0 +1,71 @@
+<!--Jumbotron/Header-->
+<section id="header" class="jumbotron text-center">
+    <h1 class="display-3"> RWB Car Dealership Employees </h1>
+</section>
+
+<div class="container">
+    <div class="row text-center h-100">
+        <div class="col-md-3 text-center my-auto">
+            <div class="card card-block d-flex" style="width: 60rem;">
+                <div class="card-body">
+                    <h3 class="card-title">Add New Employee</h3>
+                    <form class="centerForm" action="/employee" method="post">
+                        <fieldset>
+                            <div>
+                                <label for="employee">Employee Name:
+                                    <input type="text" name="name" id="employeeName" required>
+                                </label>
+                                <label for="employee">Salary Name:
+                                    <input type="number" name="salary" id="employeeSalary" required>
+                                </label>
+                                <label for="employee">Number of Cars Sold:
+                                    <input type="number" name="num_cars_sold" id="employeeSales" required>
+                                </label>
+                            </div>
+                            <input type="submit" value="Add Employee" id="addEmployee">
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row text-center h-100">
+        <div class="col-md-3 text-center my-auto">
+            <div class="card card-block d-flex" style="width: 60rem;">
+                <div class="card-body">
+                    <h3 class="card-title">List of Employees</h3>
+                    <table class="table table-striped" border="1" width="400" height="80" align="left">
+                        <tr>
+                            <td>Name </td>
+                            <td>Salary </td>
+                            <td>Number of Cars Sold </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        {{#each employees}}
+                        <tr>
+                            <td>{{name}}</td>
+                            <td>{{salary}}</td>
+                            <td>{{num_cars_sold}}</td>
+                            <td>
+                                <button type="button">
+                                    <a href="/employee/edit/{{employee_id}}">EDIT</a>
+                                </button>
+                            </td>
+                            <td>
+                                <form action="/employee/{{employee_id}}?_method=DELETE" onsubmit="();return false"
+                                    method="POST">
+                                    <button type="submit"> DELETE</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
